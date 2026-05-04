@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context docBase="C:\Project\Java\LibraryManagement\Tomcat-test\src\main\webapp">
+  <Resources cacheMaxSize="10240">
+    <PreResources base="C:/Project/Java/LibraryManagement/Tomcat-test/build/classes/java/main" className="org.apache.catalina.webresources.DirResourceSet" webAppMount="/WEB-INF/classes"/>
+  </Resources>
+</Context>
