@@ -1,21 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: DELL
-  Date: 5/5/2026
-  Time: 9:29 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <h2>User List</h2>
-<a href="users?action=create">Add New</a>
+
+<a href="users?action=create">Add New User</a>
 
 <table border="1">
     <tr>
@@ -34,5 +21,3 @@
         </tr>
     </c:forEach>
 </table>
-</body>
-</html>

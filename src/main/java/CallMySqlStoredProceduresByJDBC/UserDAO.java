@@ -147,4 +147,60 @@ public class UserDAO implements IUserDAO {
             cs.executeUpdate();
         }
     }
+
+    @Override
+    public void addUserTransaction(User user, List<Integer> permissions) {
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmtAssignment = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+
+
+            conn.setAutoCommit(false);
+
+            // 1. Insert user
+            pstmt = conn.prepareStatement(INSERT_USERS_SQL, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, user.getName());
+            pstmt.setString(2, user.getEmail());
+            pstmt.setString(3, user.getCountry());
+
+            int rowAffected = pstmt.executeUpdate();
+
+            // 2. Lấy id
+            rs = pstmt.getGeneratedKeys();
+            int userId = 0;
+            if (rs.next()) userId = rs.getInt(1);
+
+            // 3. Insert permission
+            if (rowAffected == 1) {
+                String sql = "INSERT INTO user_permision(user_id, permision_id) VALUES (?,?)";
+                pstmtAssignment = conn.prepareStatement(sql);
+
+                for (int p : permissions) {
+                    pstmtAssignment.setInt(1, userId);
+                    pstmtAssignment.setInt(2, p);
+                    pstmtAssignment.executeUpdate();
+                }
+
+
+                conn.commit();
+
+            } else {
+                conn.rollback();
+            }
+
+        } catch (SQLException e) {
+            try {
+                if (conn != null) conn.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+    }
+
 }

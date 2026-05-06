@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/users")
 public class UserServlet extends HttpServlet {
@@ -77,13 +80,34 @@ public class UserServlet extends HttpServlet {
     }
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        User user = new User(
-                request.getParameter("name"),
-                request.getParameter("email"),
-                request.getParameter("country")
-        );
-        userDAO.insertUserStore(user);
+            throws SQLException, IOException, ServletException {
+
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
+
+
+        List<Integer> permissions = new ArrayList<>();
+
+        if (request.getParameter("add") != null) {
+            permissions.add(1);
+        }
+        if (request.getParameter("edit") != null) {
+            permissions.add(2);
+        }
+        if (request.getParameter("delete") != null) {
+            permissions.add(3);
+        }
+        if (request.getParameter("view") != null) {
+            permissions.add(4);
+        }
+
+        // Tạo user
+        User newUser = new User(name, email, country);
+
+        userDAO.addUserTransaction(newUser, permissions);
+
+        // Điều hướng lại danh sách
         response.sendRedirect("users");
     }
 
@@ -98,4 +122,5 @@ public class UserServlet extends HttpServlet {
         userDAO.updateUser(user);
         response.sendRedirect("users");
     }
+
 }
