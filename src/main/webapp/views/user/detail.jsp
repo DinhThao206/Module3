@@ -10,8 +10,7 @@
 
     <title>${story.title}</title>
 
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/detail.css">
 
 </head>
 

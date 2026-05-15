@@ -69,10 +69,29 @@
 
             <form action="${pageContext.request.contextPath}/admin/upload-chapter"
                   method="post" enctype="multipart/form-data" class="admin-form">
+
                 <div class="form-group">
-                    <label for="storyId">ID Truyện</label>
-                    <input type="number" id="storyId" name="storyId" required placeholder="Nhập ID truyện">
+
+                    <label for="storyId"> Chọn Truyện </label>
+
+                    <select id="storyId" name="storyId" required>
+
+                        <option value=""> -- Chọn truyện --</option>
+
+                        <c:forEach var="story" items="${storyList}">
+                            <option value="${story.id}">
+
+                                    ${story.title}
+
+                            </option>
+
+                        </c:forEach>
+
+                    </select>
+
                 </div>
+
+
                 <div class="form-group">
                     <label for="chapterNumber">Số Chương</label>
                     <input type="number" id="chapterNumber" name="chapterNumber" required placeholder="Nhập số chương">
