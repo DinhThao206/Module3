@@ -10,107 +10,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoryDAO {
-
     public List<Story> getAllStories() {
-
         List<Story> storyList = new ArrayList<>();
 
         try {
-
-            Connection conn =
-                    DBConnection.getConnection();
-
-            String sql =
-                    "SELECT * FROM stories";
-
-            PreparedStatement ps =
-                    conn.prepareStatement(sql);
-
-            ResultSet rs =
-                    ps.executeQuery();
+            Connection conn = DBConnection.getConnection();
+            String sql = "SELECT * FROM stories";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-
-                Story story =
-                        new Story();
-
-                story.setId(
-                        rs.getInt("id"));
-
-                story.setTitle(
-                        rs.getString("title"));
-
-                story.setAuthor(
-                        rs.getString("author"));
-
-                story.setGenre(
-                        rs.getString("genre"));
-
-                story.setDescription(
-                        rs.getString("description"));
-
-                story.setCoverImage(
-                        rs.getString("cover_image"));
-
-                story.setChapterCount(
-                        rs.getInt("chapter_count"));
-
+                Story story = new Story();
+                story.setId(rs.getInt("id"));
+                story.setTitle(rs.getString("title"));
+                story.setAuthor(rs.getString("author"));
+                story.setGenre(rs.getString("genre"));
+                story.setDescription(rs.getString("description"));
+                story.setCoverImage(rs.getString("cover_image"));
+                story.setChapterCount(rs.getInt("chapter_count"));
                 storyList.add(story);
             }
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
-
         return storyList;
     }
 
 
     public Story getStoryById(int id) {
-
         Story story = null;
 
         try {
+            Connection conn = DBConnection.getConnection();
 
-            Connection conn =
-                    DBConnection.getConnection();
-
-            String sql =
-                    "SELECT * FROM stories WHERE id=?";
-
-            PreparedStatement ps =
-                    conn.prepareStatement(sql);
-
+            String sql = "SELECT * FROM stories WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-
-            ResultSet rs =
-                    ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
                 story = new Story();
-
-                story.setId(
-                        rs.getInt("id"));
-
-                story.setTitle(
-                        rs.getString("title"));
-
-                story.setAuthor(
-                        rs.getString("author"));
-
-                story.setGenre(
-                        rs.getString("genre"));
-
-                story.setDescription(
-                        rs.getString("description"));
-
-                story.setCoverImage(
-                        rs.getString("cover_image"));
-
-                story.setChapterCount(
-                        rs.getInt("chapter_count"));
+                story.setId(rs.getInt("id"));
+                story.setTitle(rs.getString("title"));
+                story.setAuthor(rs.getString("author"));
+                story.setGenre(rs.getString("genre"));
+                story.setDescription(rs.getString("description"));
+                story.setCoverImage(rs.getString("cover_image"));
+                story.setChapterCount(rs.getInt("chapter_count"));
             }
 
         } catch (Exception e) {
@@ -122,53 +69,29 @@ public class StoryDAO {
     }
 
 
-
-
-
     // ================= ADD STORY =================
 
     public boolean addStory(Story story) {
 
         try {
+            Connection conn = DBConnection.getConnection();
+            String sql = "INSERT INTO stories(title,author,genre,description,cover_image,chapter_count) " + "VALUES(?,?,?,?,?,?)";
 
-            Connection conn =
-                    DBConnection.getConnection();
-
-            String sql =
-                    "INSERT INTO stories(title,author,genre,description,cover_image,chapter_count) "
-                            + "VALUES(?,?,?,?,?,?)";
-
-            PreparedStatement ps =
-                    conn.prepareStatement(sql);
-
-            ps.setString(1,
-                    story.getTitle());
-
-            ps.setString(2,
-                    story.getAuthor());
-
-            ps.setString(3,
-                    story.getGenre());
-
-            ps.setString(4,
-                    story.getDescription());
-
-            ps.setString(5,
-                    story.getCoverImage());
-
-            ps.setInt(6,
-                    story.getChapterCount());
-
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, story.getTitle());
+            ps.setString(2, story.getAuthor());
+            ps.setString(3, story.getGenre());
+            ps.setString(4, story.getDescription());
+            ps.setString(5, story.getCoverImage());
+            ps.setInt(6, story.getChapterCount());
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 
         return false;
     }
-
 
 
     // ================= UPDATE STORY =================
@@ -177,8 +100,7 @@ public class StoryDAO {
 
         try {
 
-            Connection conn =
-                    DBConnection.getConnection();
+            Connection conn = DBConnection.getConnection();
 
             String sql =
                     "UPDATE stories SET "
@@ -189,59 +111,31 @@ public class StoryDAO {
                             + "cover_image=?, "
                             + "chapter_count=? "
                             + "WHERE id=?";
-
-            PreparedStatement ps =
-                    conn.prepareStatement(sql);
-
-            ps.setString(1,
-                    story.getTitle());
-
-            ps.setString(2,
-                    story.getAuthor());
-
-            ps.setString(3,
-                    story.getGenre());
-
-            ps.setString(4,
-                    story.getDescription());
-
-            ps.setString(5,
-                    story.getCoverImage());
-
-            ps.setInt(6,
-                    story.getChapterCount());
-
-            ps.setInt(7,
-                    story.getId());
-
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, story.getTitle());
+            ps.setString(2, story.getAuthor());
+            ps.setString(3, story.getGenre());
+            ps.setString(4, story.getDescription());
+            ps.setString(5, story.getCoverImage());
+            ps.setInt(6, story.getChapterCount());
+            ps.setInt(7, story.getId());
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 
         return false;
     }
-
-
     // ================= DELETE STORY =================
 
     public boolean deleteStory(int id) {
 
         try {
-
-            Connection conn =
-                    DBConnection.getConnection();
-
-            String sql =
-                    "DELETE FROM stories WHERE id=?";
-
-            PreparedStatement ps =
-                    conn.prepareStatement(sql);
-
+            Connection conn = DBConnection.getConnection();
+            String sql = "DELETE FROM stories WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-
             return ps.executeUpdate() > 0;
 
         } catch (Exception e) {
@@ -259,15 +153,10 @@ public class StoryDAO {
         List<Story> storyList = new ArrayList<>();
 
         try {
-
             Connection conn = DBConnection.getConnection();
-
             String sql = "SELECT * FROM stories WHERE title LIKE ? OR author LIKE ? OR description LIKE ? OR genre LIKE ?";
-
             PreparedStatement ps = conn.prepareStatement(sql);
-
             String searchParam = "%" + keyword + "%";
-
             ps.setString(1, searchParam);
             ps.setString(2, searchParam);
             ps.setString(3, searchParam);
@@ -276,9 +165,7 @@ public class StoryDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-
                 Story story = new Story();
-
                 story.setId(rs.getInt("id"));
                 story.setTitle(rs.getString("title"));
                 story.setAuthor(rs.getString("author"));
@@ -291,10 +178,26 @@ public class StoryDAO {
             }
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 
         return storyList;
+    }
+
+
+    public List<String> getAllGenres() {
+        List<String> genreList = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String sql = "SELECT DISTINCT TRIM(genre) AS genre " + "FROM stories " + "WHERE genre IS NOT NULL " + "AND genre <> '' " + "ORDER BY genre ASC";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                genreList.add(rs.getString("genre"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return genreList;
     }
 }

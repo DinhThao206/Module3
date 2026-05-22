@@ -77,7 +77,7 @@
                     <div class="stat-label"> Tổng chapter</div>
                     <div class="stat-value"> 4.2K</div>
                     <div class="stat-sub"> cập nhật hôm nay</div>
-                </div>
+                </div> x
                 <div class="stat-card">
                     <div class="stat-label"> Người dùng</div>
                     <div class="stat-value"> 890</div>
