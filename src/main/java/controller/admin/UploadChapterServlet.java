@@ -74,7 +74,6 @@ public class UploadChapterServlet extends HttpServlet {
             } else {
                 req.setAttribute("error", "Tải chapter thất bại");
             }
-
             req.getRequestDispatcher("/views/admin/upload-chapter.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,7 +81,6 @@ public class UploadChapterServlet extends HttpServlet {
             List<Story> storyList = storyDAO.getAllStories();
             req.setAttribute("storyList", storyList);
             req.setAttribute("error", "Lỗi: " + e.getMessage());
-
             req.getRequestDispatcher("/views/admin/upload-chapter.jsp").forward(req, resp);
         }
     }

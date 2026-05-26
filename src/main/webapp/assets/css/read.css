@@ -1,0 +1,122 @@
+/* ================= READ PAGE ================= */
+
+.read-page {
+    background: #edeaea;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+/* ================= CHAPTER NAV ================= */
+
+.chapter-navbar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.chapter-btn,
+.chapter-list-btn {
+    background: #1f1f1f;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 1px solid #333;
+}
+
+.chapter-btn:hover,
+.chapter-list-btn:hover {
+    background: #ff4d4d;
+    border-color: #ff4d4d;
+    transform: translateY(-2px);
+}
+
+/* ================= READ WRAPPER ================= */
+
+.read-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ================= CHAPTER NAME ================= */
+
+.chapter-name {
+    text-align: center;
+    font-size: 42px;
+    color: #ff4d4d;
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+/* ================= IMAGES ================= */
+
+.chapter-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.chapter-images img {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+}
+
+.chapter-images img:hover {
+    transform: scale(1.01);
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav {
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .chapter-navbar {
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .chapter-btn,
+    .chapter-list-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .chapter-name {
+        font-size: 28px;
+    }
+
+    .read-wrapper {
+        padding: 10px;
+    }
+
+    .chapter-images {
+        gap: 15px;
+    }
+
+    .chapter-images img {
+        border-radius: 6px;
+    }
+}
+
