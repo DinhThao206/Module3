@@ -1,18 +1,16 @@
 package controller.story;
-
 import dao.ChapterDao;
+import dao.ChapterImageDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Chapter;
 
-import java.io.File;
+import model.Chapter;
+import model.ChapterImage;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 @WebServlet("/chapter")
@@ -28,34 +26,21 @@ public class ChapterServlet extends HttpServlet {
         try {
             id = Integer.parseInt(idParam);
         } catch (NumberFormatException e) {
-            resp.sendRedirect(req.getContextPath() + "/home"
-            );
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
-        ChapterDao dao = new ChapterDao();
-        Chapter chapter = dao.getChapterById(id);
+
+        ChapterDao chapterDao = new ChapterDao();
+        ChapterImageDAO imageDAO = new ChapterImageDAO();
+
+        Chapter chapter = chapterDao.getChapterById(id);
         if (chapter == null) {
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
-        Chapter prevChapter = dao.getPreviousChapter(id);
-        Chapter nextChapter = dao.getNextChapter(id);
-        String folderPath = getServletContext().getRealPath("/uploads/chapters/" + chapter.getFolderName()
-        );
-        File folder = new File(folderPath);
-        List<String> imageList = new ArrayList<>();
-        if (folder.exists() && folder.isDirectory()) {
-            File[] files = folder.listFiles();
-            if (files != null && files.length > 0) {
-                Arrays.sort(files, Comparator.comparing(File::getName));
-                for (File file : files) {
-                    if (file.isFile()) {
-                        String imagePath = req.getContextPath() + "/uploads/chapters/" + chapter.getFolderName() + "/" + file.getName();
-                        imageList.add(imagePath);
-                    }
-                }
-            }
-        }
+        Chapter prevChapter = chapterDao.getPreviousChapter(id);
+        Chapter nextChapter = chapterDao.getNextChapter(id);
+        List<ChapterImage> imageList = imageDAO.getImagesByChapterId(id);
         req.setAttribute("chapter", chapter);
         req.setAttribute("imageList", imageList);
         req.setAttribute("prevChapter", prevChapter);
@@ -63,3 +48,4 @@ public class ChapterServlet extends HttpServlet {
         req.getRequestDispatcher("/views/user/read.jsp").forward(req, resp);
     }
 }
+
