@@ -43,6 +43,10 @@
                class="sidebar-nav-item">
                 <i class="fa-solid fa-upload nav-icon"></i> Tải chương
             </a>
+            <a href="${pageContext.request.contextPath}/admin/chapters" class="sidebar-nav-item">
+                <i class="fa-solid fa-list nav-icon"></i>
+                Quản lý chapter
+            </a>
         </nav>
         <div class="sidebar-footer">
             <a href="${pageContext.request.contextPath}/logout"
@@ -103,6 +107,13 @@
                     </div>
                     <div class="menu-title"> Tải Chương</div>
                     <div class="menu-desc"> Upload chapter mới</div>
+                </a>
+
+
+                <a href="${pageContext.request.contextPath}/admin/chapters" class="menu-card">
+                    <div class="menu-icon"><i class="fa-solid fa-list"></i></div>
+                    <div class="menu-title"> Quản Lý Chapter</div>
+                    <div class="menu-desc"> Sửa, xóa chapter</div>
                 </a>
                 <!-- HOME -->
                 <a href="${pageContext.request.contextPath}/home" class="menu-card">
