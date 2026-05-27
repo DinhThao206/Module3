@@ -186,5 +186,28 @@ public class ChapterDao {
 
         return false;
     }
+
+
+    public List<Chapter> getAllChapters() {
+        List<Chapter> chapterList = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String sql = "SELECT * FROM chapters ORDER BY id DESC";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Chapter chapter = new Chapter();
+                chapter.setId(rs.getInt("id"));
+                chapter.setStoryId(rs.getInt("story_id"));
+                chapter.setChapterNumber(rs.getInt("chapter_number"));
+                chapter.setTitle(rs.getString("title"));
+                chapter.setContent(rs.getString("content"));
+                chapterList.add(chapter);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return chapterList;
+    }
 }
 

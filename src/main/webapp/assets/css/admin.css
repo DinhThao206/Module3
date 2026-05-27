@@ -28,7 +28,7 @@
     --radius-lg: 22px;
 }
 
-/* ================= RESET ================= */
+/*  RESET */
 
 * {
     margin: 0;
@@ -47,14 +47,14 @@ a {
     text-decoration: none;
 }
 
-/* ================= ADMIN LAYOUT ================= */
+/*  ADMIN LAYOUT  */
 
 .admin-wrapper {
     display: flex;
     min-height: 100vh;
 }
 
-/* ================= SIDEBAR ================= */
+/* SIDEBAR */
 
 .admin-sidebar {
     width: var(--sidebar-width);
@@ -71,7 +71,7 @@ a {
     box-shadow: 2px 0 12px rgba(79, 128, 245, 0.06);
 }
 
-/* ================= SIDEBAR LOGO ================= */
+/*SIDEBAR LOGO  */
 
 .sidebar-logo {
     padding: 22px 18px 18px;
@@ -107,7 +107,7 @@ a {
     margin-top: 2px;
 }
 
-/* ================= SIDEBAR NAV ================= */
+/*  SIDEBAR NAV  */
 
 .sidebar-nav {
     flex: 1;
@@ -157,7 +157,7 @@ a {
     flex-shrink: 0;
 }
 
-/* ================= SIDEBAR FOOTER ================= */
+/* SIDEBAR FOOTER */
 
 .sidebar-footer {
     padding: 12px 10px;
@@ -525,7 +525,7 @@ table img {
     resize: vertical;
 }
 
-/* ================= FORM ACTIONS ================= */
+/*  FORM ACTIONS  */
 
 .form-actions {
     display: flex;
@@ -533,7 +533,7 @@ table img {
     margin-top: 26px;
 }
 
-/* ================= ALERT ================= */
+/*  ALERT  */
 
 .success-message {
     background: #e6f7f0;
