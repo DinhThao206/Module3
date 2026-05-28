@@ -42,9 +42,9 @@
 
         <a href="#"> Truyện Hot </a>
 
-        <a href="#"> Lịch Sử </a>
+        <a href="${pageContext.request.contextPath}/history"> Lịch sử đọc </a>
 
-        <a href="#"> Yêu Thích </a>
+        <a href="${pageContext.request.contextPath}/favorites"> <i class="fa-solid fa-heart"></i> Yêu thích </a>
 
     </div>
     <!-- RIGHT ACTION -->

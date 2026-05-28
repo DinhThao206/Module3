@@ -61,6 +61,9 @@
                     <div class="read-btn">
                         Đọc →
                     </div>
+                    <a class="favorite-btn"
+                       href="${pageContext.request.contextPath}/favorite?action=add&storyId=${story.id}">
+                        <i class="fa-regular fa-heart"></i> Yêu thích </a>
                 </a>
             </div>
         </c:forEach>

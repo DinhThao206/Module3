@@ -5,6 +5,8 @@
 <head>
     <title>Danh sách thể loại</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/genres.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body> <!-- NAVBAR -->
 <jsp:include page="/views/layouts/navbar.jsp"/> <!-- MAIN -->
@@ -15,6 +17,6 @@
             <a class="genre-card" href="${pageContext.request.contextPath}/genre?name=${genre}"> ${genre} </a> </c:forEach>
     </div>
 </div> <!-- FOOTER -->
-<jsp:include page="/views/layouts/footer.jsp"/>
+<%--<jsp:include page="/views/layouts/footer.jsp"/>--%>
 </body>
 </html>
