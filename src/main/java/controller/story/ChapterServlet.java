@@ -1,6 +1,7 @@
 package controller.story;
 import dao.ChapterDao;
 import dao.ChapterImageDAO;
+import dao.ReadingHistoryDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import model.Chapter;
 import model.ChapterImage;
+import model.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,6 +43,11 @@ public class ChapterServlet extends HttpServlet {
         Chapter prevChapter = chapterDao.getPreviousChapter(id);
         Chapter nextChapter = chapterDao.getNextChapter(id);
         List<ChapterImage> imageList = imageDAO.getImagesByChapterId(id);
+        User user = (User) req.getSession().getAttribute("user");
+        if (user != null) {
+            ReadingHistoryDAO historyDAO = new ReadingHistoryDAO();
+            historyDAO.saveHistory(user.getId(), chapter.getStoryId(), chapter.getId());
+        }
         req.setAttribute("chapter", chapter);
         req.setAttribute("imageList", imageList);
         req.setAttribute("prevChapter", prevChapter);
